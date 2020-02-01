@@ -2,44 +2,231 @@
 <html lang="uk">
 <head>
   <meta charset="utf-8">
-  <title>DocBlock</title>
+  <title>IMT 1</title>
   <meta name="description" content="DocBlock starting...">
   <meta name="author" content="Sinepolsky">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="vendor/jquery-ui-1.12.1/jquery-ui.min.css">
   <link rel="stylesheet" href="vendor/bootstrap-4.4.1/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.standalone.min.css">
+  <link rel="stylesheet" href="vendor/fa/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Fixed navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-md fixed-top bg-light">
+    <a class="navbar-brand" href=""><i class="fas fa-globe"></i></a>
+    <button class="navbar-toggler" type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarCollapse" 
+        aria-controls="navbarCollapse" 
+        aria-expanded="false" 
+        aria-label="Навігація">
+      <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="">I-M-T <span class="sr-only">(поточна)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link disabled" href="#" 
+              tabindex="-1" 
+              aria-disabled="true">
+            Йде розробка...
+          </a>
         </li>
       </ul>
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <div class="mt-2 mt-md-0">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="cur_date_"
+                data-toggle="tooltip"
+                data-html="true"
+                title="<b>Поточна дата</b><br/>Є глобальним параметром для всіх даних">
+              <i class="fas fa-calendar-check"></i>
+            </span>
+          </div>
+          <input type="text" class="form-control" id="cur_date"
+              placeholder="Дата" 
+              aria-label="CurDate" 
+              aria-describedby="cur_date_" />
+        </div>
+      </div>
+      <div class="ml-2 mt-2 mt-md-0">
+        <button class="btn btn-outline-info my-2 my-sm-0">Вхід</button>
+      </div>
     </div>
   </nav>
   <main>
-    
+    <div class="container">
+      <h1 class="text-center"><i class="fas fa-globe"></i> I-M-TRYING</h1>
+      <h5>Останні зміни:</h5>
+      <div class="card w-100 mt-2">
+        <div class="card-body pt-1">
+          <small class="text-muted"><i class="fas fa-calendar-alt"></i>
+            <span data-date="2020-02-01" data-display="date"></span>
+          </small>
+          <p class="card-text">
+              <p>Початок!</p>
+              <p>Вдалося зробити вікно очікування з ASCII-колом-спіннером.</p>
+              <button type="button" class="btn btn-primary" id="wait_modal">
+                Приклад вікна очікування
+              </button>
+          </p>
+        </div>
+      </div>
+    </div>
   </main>
+  
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" 
+    data-backdrop="static" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="staticBackdropLabel" 
+    aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          Очікування...
+        </h5>
+        <button type="button" class="close" 
+            data-dismiss="modal" 
+            aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre id="wait"></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" 
+            data-dismiss="modal">
+          Закрити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  
   <script src="vendor/jquery-3.4.1.min.js"></script>
   <script src="vendor/jquery-ui-1.12.1/jquery-ui.min.js"></script>
   <script src="vendor/bootstrap-4.4.1/popper-1.16.0.min.js"></script>
   <script src="vendor/bootstrap-4.4.1/bootstrap.min.js"></script>
+  <script src="vendor/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="vendor/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.uk.min.js"></script>
+  <script>
+localStorage.setItem('DataToday',(new Date()).toISOString());
+$('#cur_date').datepicker({
+    language: "uk"
+}).datepicker('update', (new Date()));
+
+$('#cur_date').on('change', function(){
+  let dt = $(this).datepicker('getDate');
+  if (dt === null){
+    $(this).datepicker( 'update', 
+      new Date(localStorage.getItem('DataToday')) );
+  } else {
+    localStorage.setItem('DataToday', dt.toISOString());
+  }
+});
+
+$(function(){
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+$('span[data-display="date"]').each(function(index,obj){
+  let dnow = new Date();
+  let dt = new Date($(obj).attr('data-date'));
+  let y = dt.getFullYear();
+  let m = dt.getMonth() + 1;
+  let d = dt.getDate();
+  let str = "";
+  str = ( (d < 10)? '0' : '') + d
+    + '.' + ( (m < 10)? '0' : '') + m
+    + '.' + y;
+  let diff = parseInt(dnow.toISOString().substr(0,10).replace(/-/g,""),10)
+      - parseInt(dt.toISOString().substr(0,10).replace(/-/g,""),10);
+  switch(diff){
+    case 0: str = "Сьогодні"; break;
+    case 1: str = "Вчора"; break;
+    case 2: str = "Два дні тому"; break;
+    case 3: str = "Три дні тому"; break;
+    case 4: str = "Чотири дні тому"; break;
+    case 5: str = "П'ять днів тому"; break;
+  }
+  $(obj).text(str);
+});
+
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) 
+      + replacement
+      + this.substr(index + replacement.length);
+}
+
+function WaitProgress($pre){
+  let k = 0;
+  let circleSybols 
+    = "-~~~-,',,,,,,,,',',___,-',,,,,,,,,',";
+  let arr = [];
+  let indexes = [];
+  let textOriginal = `
+                      Z 0 1 2 3 4 5
+                  X Y               6 7
+                W                       8
+               V                         9
+              U         Зачекайте         A
+              T         будь ласка        B
+              S                           C
+               R                         D
+                Q                       E
+                  P                  G F
+                    O N M L K J I  H
+`;
+  let r = ' ';
+  for (let i = 0; i < 10; i++){
+    arr.push(i.toString());
+  }
+  for (let i = 65; i <= 90; i++){
+    arr.push(String.fromCharCode(i));
+  }
+  for (let j = 0; j < arr.length; j++){
+    let ix = textOriginal.indexOf(arr[j]);
+    if(ix > 0){
+      indexes.push(ix);
+    }
+  }
+  let iid = setInterval(function(){
+    let t = textOriginal;
+    let back = Math.floor(k / arr.length) % 2;
+    for (let i = 0; i < arr.length; i++){
+      let test = i < (k % arr.length);
+      r = ' ';
+      if ((test && !back) || (!test && back)){
+        r = circleSybols[i];
+      }
+      t = t.replaceAt(indexes[i],r);
+    }
+    $pre.text(t);
+    k++;
+    console.log(k);
+  }, 50 );
+  return iid;
+}
+
+$("#wait_modal").click(function(){
+  let iid = 0;
+  let $pre = $("#wait");
+  iid = WaitProgress($pre);
+  $("#staticBackdrop").modal();
+  $('#staticBackdrop').on('hidden.bs.modal', function (e) {
+    $pre.text("");
+    clearInterval(iid);
+  });
+
+});
+
+  </script>
 </body>
 </html>

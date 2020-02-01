@@ -1,4 +1,13 @@
+@font-face {
+  font-family: 'DroidSans';
+  src: URL('../fonts/DroidSans.ttf') format('truetype');
+}
+
 body {
-    padding-top: 4.5rem;
-  }
-  
+  padding-top: 4.5rem;
+  font-family: DroidSans;
+}
+
+#cur_date {
+  width: 120px;
+}
