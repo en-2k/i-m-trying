@@ -6,10 +6,10 @@
   <meta name="description" content="DocBlock starting...">
   <meta name="author" content="Sinepolsky">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="vendor/jquery-ui-1.12.1/jquery-ui.min.css">
-  <link rel="stylesheet" href="vendor/bootstrap-4.4.1/bootstrap.min.css">
-  <link rel="stylesheet" href="vendor/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.standalone.min.css">
-  <link rel="stylesheet" href="vendor/fa/css/all.min.css">
+  <link rel="stylesheet" href="vend/jquery-ui-1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" href="vend/bootstrap-4.4.1/bootstrap.min.css">
+  <link rel="stylesheet" href="vend/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.standalone.min.css">
+  <link rel="stylesheet" href="vend/fa/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -110,12 +110,12 @@
   </div>
 </div>
   
-  <script src="vendor/jquery-3.4.1.min.js"></script>
-  <script src="vendor/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-  <script src="vendor/bootstrap-4.4.1/popper-1.16.0.min.js"></script>
-  <script src="vendor/bootstrap-4.4.1/bootstrap.min.js"></script>
-  <script src="vendor/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
-  <script src="vendor/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.uk.min.js"></script>
+  <script src="vend/jquery-3.4.1.min.js"></script>
+  <script src="vend/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script src="vend/bootstrap-4.4.1/popper-1.16.0.min.js"></script>
+  <script src="vend/bootstrap-4.4.1/bootstrap.min.js"></script>
+  <script src="vend/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="vend/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.uk.min.js"></script>
   <script>
 localStorage.setItem('DataToday',(new Date()).toISOString());
 $('#cur_date').datepicker({
@@ -210,7 +210,6 @@ function WaitProgress($pre){
     }
     $pre.text(t);
     k++;
-    console.log(k);
   }, 50 );
   return iid;
 }
