@@ -50,7 +50,7 @@
               <i class="fas fa-calendar-check"></i>
             </span>
           </div>
-          <input type="date" class="form-control" id="cur_date"
+          <input type="text" class="form-control" id="cur_date"
               placeholder="Дата" 
               aria-label="CurDate" 
               aria-describedby="cur_date_" />
@@ -135,6 +135,7 @@ $('#cur_date').on('change', function(){
     localStorage.setItem('DataToday', dt.toISOString());
   }
 });
+$("#cur_date").datepicker().on('show',function(){$("#cur_date").blur();});
 
 $(function(){
   $('[data-toggle="tooltip"]').tooltip()
