@@ -135,7 +135,11 @@ $('#cur_date').on('change', function(){
     localStorage.setItem('DataToday', dt.toISOString());
   }
 });
-$("#cur_date").datepicker().on('show',function(){$("#cur_date").blur();});
+$("#cur_date").datepicker().on('show',function(){
+  if($(window).width() <= 770){
+    $("#cur_date").blur();
+  }
+});
 
 $(function(){
   $('[data-toggle="tooltip"]').tooltip()
